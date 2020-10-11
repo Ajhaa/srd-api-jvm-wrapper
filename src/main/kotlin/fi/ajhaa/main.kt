@@ -1,3 +1,6 @@
+package fi.ajhaa
+
+import fi.ajhaa.api.SRDApi
 
 fun main(args: Array<String>) {
     val api = SRDApi("http://localhost:3000")

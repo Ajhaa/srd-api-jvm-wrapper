@@ -1,3 +1,5 @@
+package fi.ajhaa.data
+
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -17,27 +19,29 @@ class Class(
     @JsonProperty("subclasses")
     private val subclassesRef: List<ApiReference<Subclass>>
 ) : ApiObject() {
+    @get:JsonIgnore
     val savingThrows: List<AbilityScore> by lazy {
-        fromApiReferenceList(savingThrowsRef, api!!.abilityScores)
+        savingThrowsRef.fromApiReferenceList(api!!.abilityScores)
     }
 
     @get:JsonIgnore
     val proficiencies: List<Proficiency> by lazy {
-        fromApiReferenceList(proficienciesRef, api!!.proficiencies)
+        proficienciesRef.fromApiReferenceList(api!!.proficiencies)
     }
 
+    @get:JsonIgnore
     val proficiencyChoices: List<Choice<Proficiency>> by lazy {
         proficiencyChoicesRef.map {
             Choice(
                 it.choose,
                 it.type,
-                fromApiReferenceList(it.fromRef, api!!.proficiencies)
+                it.fromRef.fromApiReferenceList(api!!.proficiencies)
             )
         }
     }
 
     @get:JsonIgnore
     val subclasses: List<Subclass> by lazy {
-        fromApiReferenceList(subclassesRef, api!!.subclasses)
+        subclassesRef.fromApiReferenceList(api!!.subclasses)
     }
 }

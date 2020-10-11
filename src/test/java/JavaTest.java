@@ -1,5 +1,10 @@
+import fi.ajhaa.data.Class;
+import fi.ajhaa.api.SRDApi;
+import fi.ajhaa.data.AbilityScore;
+import fi.ajhaa.data.Choice;
+import fi.ajhaa.data.Proficiency;
+import fi.ajhaa.data.Subclass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.List;
 

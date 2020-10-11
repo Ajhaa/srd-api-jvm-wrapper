@@ -1,4 +1,5 @@
-import com.fasterxml.jackson.annotation.JsonIgnore
+package fi.ajhaa.data
+
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class ApiChoice<T: ApiObject>(

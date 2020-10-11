@@ -1,3 +1,5 @@
+package fi.ajhaa.data
+
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Subclass (
