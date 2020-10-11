@@ -8,6 +8,7 @@ import java.net.http.HttpResponse
 
 abstract class ApiObject {
     protected var api: SRDApi? = null
+    // abstract val basePath: String
 
     fun initApi(api: SRDApi) {
         this.api = api

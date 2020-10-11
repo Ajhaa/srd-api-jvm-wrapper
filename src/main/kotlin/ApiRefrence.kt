@@ -1,5 +1,5 @@
-data class ApiReference<T>(
+data class ApiReference<T: ApiObject>(
     val index: String,
     val name: String,
-    private val url: String
+    val url: String
 ) : ApiObject()

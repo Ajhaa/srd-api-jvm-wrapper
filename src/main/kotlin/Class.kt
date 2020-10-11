@@ -10,6 +10,8 @@ class Class(
     val hitDie: String,
     @JsonProperty("proficiencies")
     val proficienciesRef: List<ApiReference<Proficiency>>,
+    @JsonProperty("proficiency_choices")
+    private val proficiencyChoicesRef: List<ApiChoice<Proficiency>>,
     @JsonProperty("saving_throws")
     private val savingThrowsRef: List<ApiReference<AbilityScore>>,
     @JsonProperty("subclasses")
@@ -22,6 +24,15 @@ class Class(
     @get:JsonIgnore
     val proficiencies: List<Proficiency> by lazy {
         fromApiReferenceList(proficienciesRef, api!!.proficiencies)
+    }
+
+    val proficiencyChoices: List<Choice<Proficiency>> by lazy {
+        val choices = mutableListOf<Choice<Proficiency>>()
+        for (apiChoice in proficiencyChoicesRef) {
+            val prof = fromApiReferenceList(apiChoice.fromRef, api!!.proficiencies)
+            choices.add(Choice(apiChoice.choose, apiChoice.type, prof))
+        }
+        choices
     }
 
     @get:JsonIgnore

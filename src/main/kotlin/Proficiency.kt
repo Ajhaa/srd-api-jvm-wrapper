@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Proficiency(
+data class Proficiency(
     val index: String,
     val type: String,
     val name: String,
