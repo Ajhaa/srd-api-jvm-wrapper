@@ -6,8 +6,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JavaTest {
-    SRDApi api = new SRDApi("http://localhost:3000");
-    Class wizard = api.getClasses().get("wizard");
+    SRDApi api;
+    Class wizard;
+    public JavaTest() {
+        String apiUrl = System.getenv("API_URL");
+        if (apiUrl == null) apiUrl = "http://localhost:3000";
+        api = new SRDApi(apiUrl);
+        wizard = api.getClasses().get("wizard");
+    }
 
     @Test
     public void testGetClass() {
