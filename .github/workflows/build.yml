@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11' 
+          java-package: jdk 
+          architecture: x86 
+      - uses: actions/checkout@v2
+        
+      - name: create directory for api
+        run: mkdir api
+        
+      - uses: actions/checkout@v2
+        with:
+          repository: bagelbits/5e-srd-api
+          path: ./api
+
+      - name: Start 5e-srd-api
+        run: docker-compose -f api/docker-compose.yml up -d
+
+      - name: Build and test
+        run: ./gradlew build
