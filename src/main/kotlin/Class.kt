@@ -27,12 +27,13 @@ class Class(
     }
 
     val proficiencyChoices: List<Choice<Proficiency>> by lazy {
-        val choices = mutableListOf<Choice<Proficiency>>()
-        for (apiChoice in proficiencyChoicesRef) {
-            val prof = fromApiReferenceList(apiChoice.fromRef, api!!.proficiencies)
-            choices.add(Choice(apiChoice.choose, apiChoice.type, prof))
+        proficiencyChoicesRef.map {
+            Choice(
+                it.choose,
+                it.type,
+                fromApiReferenceList(it.fromRef, api!!.proficiencies)
+            )
         }
-        choices
     }
 
     @get:JsonIgnore

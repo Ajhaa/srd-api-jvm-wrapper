@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JacksonInject
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import java.net.URI
@@ -8,7 +9,6 @@ import java.net.http.HttpResponse
 
 abstract class ApiObject {
     protected var api: SRDApi? = null
-    // abstract val basePath: String
 
     fun initApi(api: SRDApi) {
         this.api = api
