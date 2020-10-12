@@ -9,5 +9,5 @@ data class AbilityScore(
     val name: String,
     @JsonProperty("full_name")
     val fullName: String,
-    //val desc: List<String>
+    val desc: List<String>
 ) : ApiObject()

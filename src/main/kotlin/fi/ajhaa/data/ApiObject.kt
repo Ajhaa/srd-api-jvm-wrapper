@@ -1,12 +1,10 @@
 package fi.ajhaa.data
 
+import com.fasterxml.jackson.annotation.JacksonInject
 import fi.ajhaa.api.SRDApi
 
 abstract class ApiObject {
-    protected var api: SRDApi? = null
-
-    open fun initApi(api: SRDApi) {
-        this.api = api
-    }
+    @JacksonInject("api")
+    protected lateinit var api: SRDApi
 }
 

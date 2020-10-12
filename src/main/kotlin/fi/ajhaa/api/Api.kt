@@ -1,5 +1,8 @@
 package fi.ajhaa.api
 
+import com.fasterxml.jackson.databind.InjectableValues
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import fi.ajhaa.data.ApiObject
 
 /**
@@ -13,8 +16,13 @@ class Api<T: ApiObject>(
     private val targetClass: Class<T>,
     private val api: SRDApi
 ) {
+    private val jackson = JsonMapper.builder()
+        .addModule(KotlinModule())
+        .injectableValues(InjectableValues.Std().addValue("api", api))
+        .build()
+
     private fun fromJson(json: String) : T {
-        return api.jackson.readValue(json, targetClass)
+        return jackson.readValue(json, targetClass)
     }
 
     /**
@@ -25,7 +33,7 @@ class Api<T: ApiObject>(
     fun get(index: String) : T {
         val response = api.request(basePath + index)
         val result = fromJson(response)
-        result.initApi(api)
+        //result.initApi(api)
         return result
     }
 }

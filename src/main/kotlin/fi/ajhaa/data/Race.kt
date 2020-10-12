@@ -16,10 +16,4 @@ data class Race(
     val alignment: String,
     val age: String,
     val size: String
-) : ApiObject() {
-    override fun initApi(api: SRDApi) {
-        super.initApi(api)
-        abilityBonuses.forEach { it.initApi(api!!) }
-        abilityBonusOptions.from.forEach { it.initApi(api!!) }
-    }
-}
+) : ApiObject()

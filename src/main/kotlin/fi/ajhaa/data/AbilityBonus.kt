@@ -10,6 +10,6 @@ class AbilityBonus(
     private val url: String,
 ) : ApiObject() {
     val abilityScore: AbilityScore by lazy {
-        api!!.abilityScores.get(index)
+        api.abilityScores.get(index)
     }
 }

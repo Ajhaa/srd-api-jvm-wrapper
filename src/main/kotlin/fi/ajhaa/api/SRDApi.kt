@@ -14,7 +14,6 @@ import java.net.http.HttpResponse
 
 class SRDApi(private val url: String) {
     private val client: HttpClient = HttpClient.newHttpClient()
-    internal val jackson = JsonMapper.builder().addModule(KotlinModule()).build()
 
     fun request(path: String) : String {
         val req = HttpRequest.newBuilder()

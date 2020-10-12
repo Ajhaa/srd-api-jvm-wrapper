@@ -3,6 +3,7 @@ package fi.ajhaa.data
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import fi.ajhaa.api.SRDApi
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,12 +22,12 @@ class Class(
 ) : ApiObject() {
     @get:JsonIgnore
     val savingThrows: List<AbilityScore> by lazy {
-        savingThrowsRef.fromApiReferenceList(api!!.abilityScores)
+        savingThrowsRef.fromApiReferenceList(api.abilityScores)
     }
 
     @get:JsonIgnore
     val proficiencies: List<Proficiency> by lazy {
-        proficienciesRef.fromApiReferenceList(api!!.proficiencies)
+        proficienciesRef.fromApiReferenceList(api.proficiencies)
     }
 
     @get:JsonIgnore
@@ -35,13 +36,13 @@ class Class(
             Choice(
                 it.choose,
                 it.type,
-                it.fromRef.fromApiReferenceList(api!!.proficiencies)
+                it.fromRef.fromApiReferenceList(api.proficiencies)
             )
         }
     }
 
     @get:JsonIgnore
     val subclasses: List<Subclass> by lazy {
-        subclassesRef.fromApiReferenceList(api!!.subclasses)
+        subclassesRef.fromApiReferenceList(api.subclasses)
     }
 }
