@@ -2,11 +2,7 @@ package fi.ajhaa.api
 
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import fi.ajhaa.data.AbilityScore
-import fi.ajhaa.data.Class
-import fi.ajhaa.data.Proficiency
-import fi.ajhaa.data.Race
-import fi.ajhaa.data.Subclass
+import fi.ajhaa.data.*
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -29,4 +25,9 @@ class SRDApi(private val url: String) {
     val abilityScores = Api("/api/ability-scores/", AbilityScore::class.java, this)
     val proficiencies = Api("/api/proficiencies/", Proficiency::class.java, this)
     val subclasses = Api("/api/subclasses/", Subclass::class.java, this)
+    val skills = Api("/api/skills/", Skill::class.java, this)
+    val languages = Api("/api/languages/", Language::class.java, this)
+    val traits = Api("/api/traits/", Trait::class.java, this)
+    val subraces = Api("/api/subraces/", Subrace::class.java, this)
+
 }

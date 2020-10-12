@@ -21,6 +21,12 @@ public class JavaTest {
     }
 
     @Test
+    public void testRacesRoot() {
+        List<Race> races = api.getRaces().list();
+        assertEquals("dragonborn", races.get(0).getIndex());
+    }
+
+    @Test
     public void testGetClass() {
         Class bard = api.getClasses().get("bard");
         assertEquals("Bard", bard.getName());
@@ -63,5 +69,13 @@ public class JavaTest {
     public void testAbilityBonusOptions() {
         Choice bonusChoice = halfElf.getAbilityBonusOptions();
         assertEquals(2, bonusChoice.getChoose());
+    }
+
+    @Test
+    public void testSkillsFromAbility() {
+        AbilityBonus bonus = halfElf.getAbilityBonuses().get(0);
+
+        Skill deception = bonus.getAbilityScore().getSkills().get(0);
+        assertEquals("Deception", deception.getName());
     }
 }

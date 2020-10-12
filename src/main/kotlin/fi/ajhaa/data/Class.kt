@@ -8,17 +8,18 @@ import fi.ajhaa.api.SRDApi
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Class private constructor(
-    val name: String,
-    @JsonProperty("hit_die")
-    val hitDie: String,
-    @JsonProperty("proficiencies")
-    private val proficienciesRef: List<ApiReference<Proficiency>>,
-    @JsonProperty("proficiency_choices")
-    private val proficiencyChoicesRef: List<ApiChoice<Proficiency>>,
-    @JsonProperty("saving_throws")
-    private val savingThrowsRef: List<ApiReference<AbilityScore>>,
-    @JsonProperty("subclasses")
-    private val subclassesRef: List<ApiReference<Subclass>>
+        val index: String,
+        val name: String,
+        @JsonProperty("hit_die")
+        val hitDie: String,
+        @JsonProperty("proficiencies")
+        private val proficienciesRef: List<ApiReference<Proficiency>>,
+        @JsonProperty("proficiency_choices")
+        private val proficiencyChoicesRef: List<ApiChoice<Proficiency>>,
+        @JsonProperty("saving_throws")
+        private val savingThrowsRef: List<ApiReference<AbilityScore>>,
+        @JsonProperty("subclasses")
+        private val subclassesRef: List<ApiReference<Subclass>>
 ) : ApiObject() {
     @get:JsonIgnore
     val savingThrows: List<AbilityScore> by lazy {
@@ -32,13 +33,7 @@ class Class private constructor(
 
     @get:JsonIgnore
     val proficiencyChoices: List<Choice<Proficiency>> by lazy {
-        proficiencyChoicesRef.map {
-            Choice(
-                it.choose,
-                it.type,
-                it.fromRef.fromApiReferenceList(api.proficiencies)
-            )
-        }
+        proficiencyChoicesRef.toChoiceList(api.proficiencies)
     }
 
     @get:JsonIgnore

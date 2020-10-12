@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.InjectableValues
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import fi.ajhaa.data.ApiObject
+import fi.ajhaa.data.ApiReference
+import fi.ajhaa.data.ApiRoot
 
 /**
  *  Class for a specific resource in the SRD api, such as class or trait
@@ -25,6 +27,11 @@ class Api<T: ApiObject>(
         return jackson.readValue(json, targetClass)
     }
 
+    private fun parseApiRoot(json: String) : List<T> {
+        val root = jackson.readValue(json, ApiRoot::class.java)
+        return root.results.map { fromJson(api.request(it.url)) }
+    }
+
     /**
      * Returns a single object from the api
      * @param index used to identify resources
@@ -32,8 +39,11 @@ class Api<T: ApiObject>(
      */
     fun get(index: String) : T {
         val response = api.request(basePath + index)
-        val result = fromJson(response)
-        //result.initApi(api)
-        return result
+        return fromJson(response)
+    }
+
+    fun list() : List<T> {
+        val response = api.request(basePath)
+        return parseApiRoot(response)
     }
 }

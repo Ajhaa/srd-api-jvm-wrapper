@@ -1,20 +1,18 @@
 package fi.ajhaa.data
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class Race private constructor(
+class Subrace private constructor(
     val index: String,
     val name: String,
-    val speed: Int,
-    val alignment: String,
+    val desc: String,
+    @JsonProperty("race")
+    private val raceRef: ApiReference<Race>,
     @JsonProperty("ability_bonuses")
     val abilityBonuses: List<AbilityBonus>,
     @JsonProperty("ability_bonus_options")
     val abilityBonusOptions: Choice<AbilityBonus>?,
-    val age: String,
-    val size: String,
-    @JsonProperty("size_description")
-    val sizeDescription: String,
     @JsonProperty("starting_proficiencies")
     private val startingProficienciesRef: List<ApiReference<Proficiency>>,
     @JsonProperty("starting_proficiency_options")
@@ -23,18 +21,14 @@ class Race private constructor(
     private val languagesRef: List<ApiReference<Language>>,
     @JsonProperty("language_options")
     private val languageOptionsRef: ApiChoice<Language>?,
-    @JsonProperty("language_desc")
-    val languageDesc: String,
-    @JsonProperty("traits")
-    private val traitsRef: List<ApiReference<Trait>>,
-    @JsonProperty("subraces")
-    private val subracesRef: List<ApiReference<Subrace>>,
-    @JsonProperty("trait_options")
-    private val traitOptionsRef: ApiChoice<Trait>?,
+    @JsonProperty("racial_traits")
+    private val racialTraitsRef: List<ApiReference<Trait>>,
+    @JsonProperty("racial_trait_options")
+    private val racialTraitOptionsRef: ApiChoice<Trait>?,
     private val url: String
 ) : ApiObject() {
-    val subraces: List<Subrace> by lazy {
-        subracesRef.fromApiReferenceList(api.subraces)
+    val race: Race by lazy {
+        api.races.get(raceRef.index)
     }
 
     val startingProficiencies: List<Proficiency> by lazy {
@@ -53,11 +47,11 @@ class Race private constructor(
         languageOptionsRef?.toChoice(api.languages)
     }
 
-    val traits: List<Trait> by lazy {
-        traitsRef.fromApiReferenceList(api.traits)
+    val racialTraits: List<Trait> by lazy {
+        racialTraitsRef.fromApiReferenceList(api.traits)
     }
 
-    val traitOptions: Choice<Trait>? by lazy {
-        traitOptionsRef?.toChoice(api.traits)
+    val racialTraitOptions: Choice<Trait>? by lazy {
+        racialTraitOptionsRef?.toChoice(api.traits)
     }
 }

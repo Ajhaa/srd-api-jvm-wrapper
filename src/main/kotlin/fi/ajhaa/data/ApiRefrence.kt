@@ -11,3 +11,4 @@ internal class ApiReference<T: ApiObject>(
 internal fun <T: ApiObject>List<ApiReference<T>>.fromApiReferenceList(api: Api<T>) : List<T> {
     return this.map { api.get(it.index) }
 }
+
