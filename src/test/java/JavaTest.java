@@ -1,9 +1,6 @@
-import fi.ajhaa.data.Class;
+import fi.ajhaa.data.*;
 import fi.ajhaa.api.SRDApi;
-import fi.ajhaa.data.AbilityScore;
-import fi.ajhaa.data.Choice;
-import fi.ajhaa.data.Proficiency;
-import fi.ajhaa.data.Subclass;
+import fi.ajhaa.data.Class;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,11 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class JavaTest {
     SRDApi api;
     Class wizard;
+    Race halfElf;
     public JavaTest() {
         String apiUrl = System.getenv("API_URL");
         if (apiUrl == null) apiUrl = "http://localhost:3000";
         api = new SRDApi(apiUrl);
         wizard = api.getClasses().get("wizard");
+        halfElf = api.getRaces().get("half-elf");
     }
 
     @Test
@@ -50,5 +49,18 @@ public class JavaTest {
 
         assertEquals(2, choice.getChoose());
         assertEquals("skill-arcana", choice.getFrom().get(0).getIndex());
+    }
+
+    @Test
+    public void testAbilityBonuses() {
+        AbilityBonus bonus = halfElf.getAbilityBonuses().get(0);
+        assertEquals("CHA", bonus.getName());
+        assertEquals("Charisma", bonus.getAbilityScore().getFullName());
+    }
+
+    @Test
+    public void testAbilityBonusOptions() {
+        Choice bonusChoice = halfElf.getAbilityBonusOptions();
+        assertEquals(2, bonusChoice.getChoose());
     }
 }

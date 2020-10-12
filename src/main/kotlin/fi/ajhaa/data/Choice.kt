@@ -1,6 +1,7 @@
 package fi.ajhaa.data
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import fi.ajhaa.api.Api
 
 data class ApiChoice<T: ApiObject>(
     val choose: Int,

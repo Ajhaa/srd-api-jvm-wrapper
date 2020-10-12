@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.dokka' version '1.4.10'
     id 'application'
 }
-group = 'me.atte'
+group = 'fi.ajhaa'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -23,5 +23,5 @@ compileKotlin {
     kotlinOptions.jvmTarget = '1.8'
 }
 application {
-    mainClassName = 'MainKt'
+    mainClassName = 'fi.ajhaa.MainKt'
 }

@@ -5,7 +5,7 @@ import fi.ajhaa.api.SRDApi
 abstract class ApiObject {
     protected var api: SRDApi? = null
 
-    fun initApi(api: SRDApi) {
+    open fun initApi(api: SRDApi) {
         this.api = api
     }
 }
