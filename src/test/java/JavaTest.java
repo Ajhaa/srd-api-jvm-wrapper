@@ -3,6 +3,7 @@ import fi.ajhaa.api.SRDApi;
 import fi.ajhaa.data.Class;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

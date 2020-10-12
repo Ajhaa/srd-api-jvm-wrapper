@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import fi.ajhaa.api.SRDApi
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class Race(
+class Race private constructor(
     val index: String,
     val name: String,
     val speed: Int,

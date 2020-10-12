@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class AbilityScore(
+class AbilityScore(
     val index: String,
     val name: String,
     @JsonProperty("full_name")

@@ -7,6 +7,8 @@ fun main() {
     try {
         val r = api.races.get("half-elf")
         println(r.abilityBonuses[0].abilityScore)
+
+        val c = api.classes.get("bard")
     } catch (e: Exception) {
         println(e)
     }

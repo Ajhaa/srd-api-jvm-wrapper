@@ -3,7 +3,7 @@ package fi.ajhaa.data
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class AbilityBonus(
+class AbilityBonus private constructor(
     val index: String,
     val name: String,
     val bonus: Int,

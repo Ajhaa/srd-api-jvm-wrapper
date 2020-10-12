@@ -7,12 +7,12 @@ import fi.ajhaa.api.SRDApi
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Class(
+class Class private constructor(
     val name: String,
     @JsonProperty("hit_die")
     val hitDie: String,
     @JsonProperty("proficiencies")
-    val proficienciesRef: List<ApiReference<Proficiency>>,
+    private val proficienciesRef: List<ApiReference<Proficiency>>,
     @JsonProperty("proficiency_choices")
     private val proficiencyChoicesRef: List<ApiChoice<Proficiency>>,
     @JsonProperty("saving_throws")

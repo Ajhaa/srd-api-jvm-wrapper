@@ -3,10 +3,10 @@ package fi.ajhaa.data
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class Proficiency(
+class Proficiency private constructor(
     val index: String,
     val type: String,
     val name: String,
-    val classes: List<ApiReference<Class>>,
-    val races: List<ApiReference<Race>>
+    private val classes: List<ApiReference<Class>>,
+    private val races: List<ApiReference<Race>>
 ) : ApiObject()

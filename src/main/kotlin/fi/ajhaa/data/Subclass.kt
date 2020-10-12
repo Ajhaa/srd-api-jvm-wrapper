@@ -2,10 +2,10 @@ package fi.ajhaa.data
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class Subclass (
+class Subclass private constructor(
     val index: String,
     @JsonProperty("class")
-    val classRef: ApiReference<Class>,
+    private val classRef: ApiReference<Class>,
     val name: String,
     @JsonProperty("subclass_flavor")
     val subclassFlavor: String,
