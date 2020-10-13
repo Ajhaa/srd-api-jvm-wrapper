@@ -80,11 +80,11 @@ public class JavaTest {
         assertEquals("Deception", deception.getName());
     }
 
-    @Test
+   /* @Test
     public void testEquipmentCategory() {
         EquipmentCategory category = api.getEquipmentCategories().get("ammunition");
         Equipment arrow = category.getEquipment().get(0);
         assertEquals(1, arrow.getCost().getQuantity());
         assertEquals("gp", arrow.getCost().getUnit());
-    }
+    } */
 }
