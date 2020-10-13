@@ -8,7 +8,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class SRDApi(private val url: String) {
+class SRDApi(private val url: String, val cache: Boolean = true) {
     private val client: HttpClient = HttpClient.newHttpClient()
 
     fun request(path: String) : String {
