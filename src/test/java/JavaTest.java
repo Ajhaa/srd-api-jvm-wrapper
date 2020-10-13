@@ -2,6 +2,7 @@ import fi.ajhaa.data.*;
 import fi.ajhaa.api.SRDApi;
 import fi.ajhaa.data.Class;
 import org.junit.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class JavaTest {
     public JavaTest() {
         String apiUrl = System.getenv("API_URL");
         if (apiUrl == null) apiUrl = "http://localhost:3000";
-        api = new SRDApi(apiUrl);
+        api = new SRDApi(apiUrl, false);
         wizard = api.getClasses().get("wizard");
         halfElf = api.getRaces().get("half-elf");
     }
@@ -77,5 +78,13 @@ public class JavaTest {
 
         Skill deception = bonus.getAbilityScore().getSkills().get(0);
         assertEquals("Deception", deception.getName());
+    }
+
+    @Test
+    public void testEquipmentCategory() {
+        EquipmentCategory category = api.getEquipmentCategories().get("ammunition");
+        Equipment arrow = category.getEquipment().get(0);
+        assertEquals(1, arrow.getCost().getQuantity());
+        assertEquals("gp", arrow.getCost().getUnit());
     }
 }

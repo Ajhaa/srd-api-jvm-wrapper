@@ -29,5 +29,7 @@ class SRDApi(private val url: String, val cache: Boolean = true) {
     val languages = Api("/api/languages/", Language::class.java, this)
     val traits = Api("/api/traits/", Trait::class.java, this)
     val subraces = Api("/api/subraces/", Subrace::class.java, this)
-
+    val equipment = Api("/api/equipment/", Equipment::class.java, this)
+    val magicItems = Api("/api/magic-items/", Equipment::class.java, this)
+    val equipmentCategories = Api("/api/equipment-categories/", EquipmentCategory::class.java, this)
 }

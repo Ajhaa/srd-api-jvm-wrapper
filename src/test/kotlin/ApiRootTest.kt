@@ -56,6 +56,16 @@ class ApiRootTest {
         assertEquals("alchemists-supplies", api.proficiencies.list()[0].index)
     }
 
+    @Test
+    fun testEquipmentRoot() {
+        assertEquals("abacus", api.equipment.list()[0].index)
+    }
+
+    @Test
+    fun testEquipmentCategoriesRoot() {
+        assertEquals("adventuring-gear", api.equipmentCategories.list()[0].index)
+    }
+
     init {
         var apiUrl = System.getenv("API_URL")
         if (apiUrl == null) apiUrl = "http://localhost:3000"
